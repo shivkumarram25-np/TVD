@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>Nepal TVD - TikTok Video Downloader</title>
+<meta name="description" content="Nepal TVD - Download TikTok, Instagram & Pinterest videos without watermark. No login required." />
+<meta name="theme-color" content="#7C3AED" />
+<link rel="manifest" href="/manifest.json" />
+<link rel="icon" href="/icons/favicon-32.png" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div class="brand">
+      <img src="/icons/icon-192.png" alt="Nepal TVD" class="brand-logo" />
+      <div class="brand-text">
+        <span class="brand-name">Nepal TVD</span>
+        <span class="brand-tag">TikTok Video Downloader</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== PAGES ===== -->
+  <main class="app-main">
+
+    <!-- ---------- HOME / DOWNLOADER PAGE ---------- -->
+    <section id="page-home" class="page active">
+
+      <div class="platform-row">
+        <div class="platform-chip active" data-tip="TikTok">
+          <span class="p-icon p-tiktok">♪</span>
+          <span>TikTok</span>
+        </div>
+        <div class="platform-chip" data-tip="Instagram">
+          <span class="p-icon p-instagram">◎</span>
+          <span>Instagram</span>
+        </div>
+        <div class="platform-chip" data-tip="Pinterest">
+          <span class="p-icon p-pinterest">📌</span>
+          <span>Pinterest</span>
+        </div>
+      </div>
+
+      <div class="input-card">
+        <p class="input-label">Video ko link yahan paste garnu hos</p>
+        <div class="input-row">
+          <input id="url-input" type="url" inputmode="url" placeholder="https://vt.tiktok.com/... ya instagram.com/... ya pinterest.com/..." autocomplete="off" spellcheck="false" />
+          <button id="paste-btn" class="icon-btn" title="Paste">📋</button>
+        </div>
+        <button id="download-btn" class="primary-btn">
+          <span class="btn-icon">⬇</span> Download
+        </button>
+        <p class="hint-text">✅ No Login &nbsp; • &nbsp; ✅ No Watermark &nbsp; • &nbsp; ✅ 100% Free</p>
+      </div>
+
+      <div id="loading-box" class="loading-box hidden">
+        <div class="spinner"></div>
+        <p>Video fetch garinxa, kripaya pratikshya garnu hos...</p>
+      </div>
+
+      <div id="error-box" class="error-box hidden"></div>
+
+      <div id="result-box" class="result-box hidden">
+        <div class="result-card">
+          <img id="result-thumb" class="result-thumb" src="" alt="thumbnail" />
+          <div class="result-info">
+            <p id="result-title" class="result-title">--</p>
+            <p id="result-author" class="result-author">--</p>
+          </div>
+        </div>
+        <div id="result-media-list" class="result-media-list"></div>
+        <button id="new-download-btn" class="ghost-btn">+ Naya Video Download</button>
+      </div>
+
+      <!-- How to use -->
+      <div class="howto-card">
+        <h3>Kasari Use Garne?</h3>
+        <ol>
+          <li>TikTok / Instagram / Pinterest app khol्नुहोस्</li>
+          <li>Video ko "Share" button thicnu hos ra "Copy Link" select garnu hos</li>
+          <li>Yaha link paste garnu hos ra <b>Download</b> button thicnu hos</li>
+          <li>Video without watermark save huncha 🎉</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ---------- 3D IMAGES PAGE ---------- -->
+    <section id="page-3d" class="page">
+      <h2 class="section-title">3D Images 🎨</h2>
+      <p class="section-sub">Tap garnu hos zoom garne ra save garne ko lagi</p>
+      <div id="gallery-3d" class="gallery-grid"></div>
+    </section>
+
+    <!-- ---------- PHOTOS PAGE ---------- -->
+    <section id="page-photos" class="page">
+      <h2 class="section-title">Photos 📷</h2>
+      <p class="section-sub">Nepal ko sundarta - tap garnu hos zoom garne ko lagi</p>
+      <div id="gallery-photos" class="gallery-grid"></div>
+    </section>
+
+    <!-- ---------- ABOUT PAGE ---------- -->
+    <section id="page-about" class="page">
+      <h2 class="section-title">About App ℹ️</h2>
+      <div class="about-card">
+        <img src="/icons/icon-192.png" class="about-logo" alt="logo" />
+        <h3>Nepal TVD</h3>
+        <p class="about-version">Version 1.0.0</p>
+        <p class="about-desc">
+          Nepal TVD ek free video downloader app ho jaha TikTok, Instagram ra
+          Pinterest ka video haru without watermark download garna sakinxa.
+          Yo app ma kunai login system chaina — direct use garna milxa.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">✅ TikTok video download (No Watermark)</div>
+          <div class="feature-item">✅ Instagram Reels / Video download</div>
+          <div class="feature-item">✅ Pinterest video/image download</div>
+          <div class="feature-item">✅ No login / signup required</div>
+          <div class="feature-item">✅ 3D Images & Photos Gallery</div>
+          <div class="feature-item">✅ 100% Free to use</div>
+        </div>
+        <p class="about-disclaimer">
+          ⚠️ Kripaya copyright content download garda respect garnu hos ra
+          personal use ko lagi matra use garnu hos.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-page="page-home">
+      <span class="nav-icon">⬇</span><span>Download</span>
+    </button>
+    <button class="nav-btn" data-page="page-3d">
+      <span class="nav-icon">🎨</span><span>3D Images</span>
+    </button>
+    <button class="nav-btn" data-page="page-photos">
+      <span class="nav-icon">📷</span><span>Photos</span>
+    </button>
+    <button class="nav-btn" data-page="page-about">
+      <span class="nav-icon">ℹ️</span><span>About</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ===== IMAGE VIEWER MODAL ===== -->
+<div id="img-modal" class="img-modal hidden">
+  <button id="img-modal-close" class="img-modal-close">✕</button>
+  <img id="img-modal-img" src="" alt="preview" />
+  <a id="img-modal-download" class="primary-btn img-modal-download" download>⬇ Save Image</a>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
