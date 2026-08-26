@@ -1,5 +1,5 @@
 // Nepal TVD Service Worker - basic cache for app shell (static assets only)
-const CACHE_NAME = "nepal-tvd-v2";
+const CACHE_NAME = "nepal-tvd-v3";
 const ASSETS = [
   "/",
   "/index.html",
@@ -8,6 +8,8 @@ const ASSETS = [
   "/manifest.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
+  "/widgets/quick-download-template.json",
+  "/widgets/quick-download-data.json",
 ];
 
 self.addEventListener("install", (event) => {
@@ -24,6 +26,44 @@ self.addEventListener("activate", (event) => {
     )
   );
   self.clients.claim();
+});
+
+// ---------- PWA Widgets (Windows 11 Widgets Board) ----------
+async function updateWidgets() {
+  if (!self.widgets) return;
+  try {
+    const widget = await self.widgets.getByTag("nepaltvd-quick-download");
+    if (!widget) return;
+    const templateRes = await fetch(widget.definition.msAcTemplate || "/widgets/quick-download-template.json");
+    const dataRes = await fetch(widget.definition.data || "/widgets/quick-download-data.json");
+    const template = await templateRes.text();
+    const data = await dataRes.text();
+    await self.widgets.updateByTag(widget.definition.tag, { template, data });
+  } catch (e) {
+    /* ignore */
+  }
+}
+
+self.addEventListener("widgetinstall", (event) => {
+  event.waitUntil(updateWidgets());
+});
+
+self.addEventListener("widgetresume", (event) => {
+  event.waitUntil(updateWidgets());
+});
+
+self.addEventListener("widgetclick", (event) => {
+  if (event.action === "quick-download") {
+    const pastedUrl = (event.data && event.data.videoUrl) || "";
+    const target = pastedUrl
+      ? "/?url=" + encodeURIComponent(pastedUrl)
+      : "/?widget=open";
+    event.waitUntil(self.clients.openWindow(target));
+  }
+});
+
+self.addEventListener("widgetuninstall", () => {
+  /* nothing to clean up */
 });
 
 self.addEventListener("fetch", (event) => {

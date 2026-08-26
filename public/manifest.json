@@ -14,7 +14,70 @@
   "theme_color": "#7C3AED",
   "categories": ["utilities", "multimedia", "productivity"],
   "prefer_related_applications": false,
-  "related_applications": [],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://nepal-tvd.pages.dev/manifest.json"
+    },
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=app.pages.nepal_tvd.twa",
+      "id": "app.pages.nepal_tvd.twa"
+    }
+  ],
+  "scope_extensions": [
+    { "origin": "https://nepal-tvd.pages.dev" },
+    { "origin": "https://*.nepal-tvd.pages.dev" }
+  ],
+  "note_taking": {
+    "new_note_url": "/?shortcut=note"
+  },
+  "file_handlers": [
+    {
+      "action": "/?file_handler=links",
+      "accept": {
+        "text/plain": [".txt"],
+        "text/uri-list": [".uri", ".url"]
+      },
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Nepal TVD Quick Download",
+      "short_name": "Quick DL",
+      "description": "Paste a TikTok, Instagram or Pinterest link and download instantly",
+      "tag": "nepaltvd-quick-download",
+      "template": "quick-download-template",
+      "ms_ac_template": "/widgets/quick-download-template.json",
+      "data": "/widgets/quick-download-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/screenshots/screenshot-narrow-1.png",
+          "sizes": "1080x1920",
+          "label": "Nepal TVD quick download widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "auth": false,
+      "update": 86400
+    }
+  ],
   "launch_handler": {
     "client_mode": "navigate-existing"
   },

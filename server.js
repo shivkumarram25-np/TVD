@@ -83,7 +83,11 @@ async function serveStatic(req, res) {
     const info = await stat(safePath);
     const filePath = info.isDirectory() ? join(safePath, "index.html") : safePath;
     const data = await readFile(filePath);
-    const type = MIME[extname(filePath).toLowerCase()] || "application/octet-stream";
+    let type = MIME[extname(filePath).toLowerCase()] || "application/octet-stream";
+    // scope_extensions ko origin association file (no extension) - JSON ho
+    if (filePath.endsWith("web-app-origin-association")) {
+      type = "application/json; charset=utf-8";
+    }
     res.writeHead(200, { "Content-Type": type, "Cache-Control": "public, max-age=300" });
     res.end(data);
   } catch {

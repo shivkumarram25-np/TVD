@@ -250,6 +250,17 @@ imgModal.addEventListener("click", (e) => {
       if (aboutBtn) aboutBtn.click();
     }
 
+    // note_taking: OS ko "New note" bata kholda input focus garne
+    if (params.get("shortcut") === "note") {
+      urlInput.focus();
+      showToast("Naya link paste garnus");
+    }
+
+    // Widget bata kholda
+    if (params.get("widget") === "open") {
+      urlInput.focus();
+    }
+
     // URL safaa garne (params nahataye refresh ma feri trigger hunchha)
     if (params.toString()) {
       history.replaceState(null, "", window.location.pathname);
@@ -258,6 +269,33 @@ imgModal.addEventListener("click", (e) => {
     /* ignore */
   }
 })();
+
+// ---------- File Handlers (launchQueue) ----------
+// .txt / .uri / .url file app ma khulda bhitra ko link auto-paste hunchha
+if ("launchQueue" in window) {
+  try {
+    window.launchQueue.setConsumer(async (launchParams) => {
+      try {
+        if (!launchParams.files || !launchParams.files.length) return;
+        for (const handle of launchParams.files) {
+          const file = await handle.getFile();
+          const text = await file.text();
+          const match = text.match(/https?:\/\/\S+/);
+          if (match) {
+            urlInput.value = match[0];
+            showToast("File bata link ready! Download thichnu hos");
+            urlInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            break;
+          }
+        }
+      } catch (e) {
+        /* ignore */
+      }
+    });
+  } catch (e) {
+    /* ignore */
+  }
+}
 
 // ---------- Service Worker (PWA) ----------
 if ("serviceWorker" in navigator) {
