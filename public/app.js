@@ -219,6 +219,46 @@ imgModal.addEventListener("click", (e) => {
   if (e.target === imgModal) imgModal.classList.add("hidden");
 });
 
+// ---------- PWA launch params (share_target / shortcuts / protocol) ----------
+(function handleLaunchParams() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+
+    // Share Target: TikTok/Instagram/Pinterest app bata "Share" garda link aauchha
+    const sharedUrl = params.get("url") || params.get("text") || "";
+    const linkMatch = sharedUrl.match(/https?:\/\/\S+/);
+    if (linkMatch) {
+      urlInput.value = linkMatch[0];
+      showToast("Link ready! Download thichnu hos");
+      urlInput.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    // Protocol handler: web+nepaltvd://<link>
+    const proto = params.get("protocol");
+    if (proto) {
+      const decoded = decodeURIComponent(proto).replace(/^web\+nepaltvd:\/?\/?/, "");
+      const pm = decoded.match(/https?:\/\/\S+/);
+      if (pm) {
+        urlInput.value = pm[0];
+        showToast("Link ready! Download thichnu hos");
+      }
+    }
+
+    // Shortcut: About/How-To page kholne
+    if (params.get("shortcut") === "howto") {
+      const aboutBtn = document.querySelector('.nav-btn[data-page="page-about"]');
+      if (aboutBtn) aboutBtn.click();
+    }
+
+    // URL safaa garne (params nahataye refresh ma feri trigger hunchha)
+    if (params.toString()) {
+      history.replaceState(null, "", window.location.pathname);
+    }
+  } catch (e) {
+    /* ignore */
+  }
+})();
+
 // ---------- Service Worker (PWA) ----------
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

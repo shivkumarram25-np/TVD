@@ -1,5 +1,5 @@
 // Nepal TVD Service Worker - basic cache for app shell (static assets only)
-const CACHE_NAME = "nepal-tvd-v1";
+const CACHE_NAME = "nepal-tvd-v2";
 const ASSETS = [
   "/",
   "/index.html",
