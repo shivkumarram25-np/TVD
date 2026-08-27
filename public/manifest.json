@@ -1,25 +1,180 @@
 {
+  "id": "/",
   "name": "Nepal TVD - TikTok Video Downloader",
   "short_name": "Nepal TVD",
   "description": "Download TikTok, Instagram & Pinterest videos without watermark. No login required.",
   "start_url": "/",
   "scope": "/",
+  "lang": "ne",
+  "dir": "ltr",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "portrait",
   "background_color": "#F5F3FF",
   "theme_color": "#7C3AED",
+  "categories": ["utilities", "multimedia", "productivity"],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://nepal-tvd.pages.dev/manifest.json"
+    },
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=app.pages.nepal_tvd.twa",
+      "id": "app.pages.nepal_tvd.twa"
+    }
+  ],
+  "scope_extensions": [
+    { "origin": "https://nepal-tvd.pages.dev" },
+    { "origin": "https://*.nepal-tvd.pages.dev" }
+  ],
+  "note_taking": {
+    "new_note_url": "/?shortcut=note"
+  },
+  "file_handlers": [
+    {
+      "action": "/?file_handler=links",
+      "accept": {
+        "text/plain": [".txt"],
+        "text/uri-list": [".uri", ".url"]
+      },
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Nepal TVD Quick Download",
+      "short_name": "Quick DL",
+      "description": "Paste a TikTok, Instagram or Pinterest link and download instantly",
+      "tag": "nepaltvd-quick-download",
+      "template": "quick-download-template",
+      "ms_ac_template": "/widgets/quick-download-template.json",
+      "data": "/widgets/quick-download-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/screenshots/screenshot-narrow-1.png",
+          "sizes": "1080x1920",
+          "label": "Nepal TVD quick download widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "auth": false,
+      "update": 86400
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "edge_side_panel": {
+    "preferred_width": 412
+  },
   "icons": [
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot-narrow-1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Nepal TVD - TikTok, Instagram & Pinterest video downloader"
+    },
+    {
+      "src": "/screenshots/screenshot-narrow-2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Paste link and download video without watermark"
+    },
+    {
+      "src": "/screenshots/screenshot-wide-1.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Nepal TVD desktop view - free video downloader"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Video Download",
+      "short_name": "Download",
+      "description": "Paste a TikTok, Instagram or Pinterest link and download the video",
+      "url": "/?shortcut=download",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Kasari Download Garne",
+      "short_name": "How To",
+      "description": "Step-by-step guide to download videos",
+      "url": "/?shortcut=howto",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+nepaltvd",
+      "url": "/?protocol=%s"
     }
   ]
 }

@@ -219,6 +219,84 @@ imgModal.addEventListener("click", (e) => {
   if (e.target === imgModal) imgModal.classList.add("hidden");
 });
 
+// ---------- PWA launch params (share_target / shortcuts / protocol) ----------
+(function handleLaunchParams() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+
+    // Share Target: TikTok/Instagram/Pinterest app bata "Share" garda link aauchha
+    const sharedUrl = params.get("url") || params.get("text") || "";
+    const linkMatch = sharedUrl.match(/https?:\/\/\S+/);
+    if (linkMatch) {
+      urlInput.value = linkMatch[0];
+      showToast("Link ready! Download thichnu hos");
+      urlInput.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    // Protocol handler: web+nepaltvd://<link>
+    const proto = params.get("protocol");
+    if (proto) {
+      const decoded = decodeURIComponent(proto).replace(/^web\+nepaltvd:\/?\/?/, "");
+      const pm = decoded.match(/https?:\/\/\S+/);
+      if (pm) {
+        urlInput.value = pm[0];
+        showToast("Link ready! Download thichnu hos");
+      }
+    }
+
+    // Shortcut: About/How-To page kholne
+    if (params.get("shortcut") === "howto") {
+      const aboutBtn = document.querySelector('.nav-btn[data-page="page-about"]');
+      if (aboutBtn) aboutBtn.click();
+    }
+
+    // note_taking: OS ko "New note" bata kholda input focus garne
+    if (params.get("shortcut") === "note") {
+      urlInput.focus();
+      showToast("Naya link paste garnus");
+    }
+
+    // Widget bata kholda
+    if (params.get("widget") === "open") {
+      urlInput.focus();
+    }
+
+    // URL safaa garne (params nahataye refresh ma feri trigger hunchha)
+    if (params.toString()) {
+      history.replaceState(null, "", window.location.pathname);
+    }
+  } catch (e) {
+    /* ignore */
+  }
+})();
+
+// ---------- File Handlers (launchQueue) ----------
+// .txt / .uri / .url file app ma khulda bhitra ko link auto-paste hunchha
+if ("launchQueue" in window) {
+  try {
+    window.launchQueue.setConsumer(async (launchParams) => {
+      try {
+        if (!launchParams.files || !launchParams.files.length) return;
+        for (const handle of launchParams.files) {
+          const file = await handle.getFile();
+          const text = await file.text();
+          const match = text.match(/https?:\/\/\S+/);
+          if (match) {
+            urlInput.value = match[0];
+            showToast("File bata link ready! Download thichnu hos");
+            urlInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            break;
+          }
+        }
+      } catch (e) {
+        /* ignore */
+      }
+    });
+  } catch (e) {
+    /* ignore */
+  }
+}
+
 // ---------- Service Worker (PWA) ----------
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
